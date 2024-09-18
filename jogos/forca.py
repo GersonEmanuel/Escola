@@ -5,7 +5,7 @@ def mensangem_inicio():
     print("_"*50)
 
 def gera_palavra_secreta():
-    arquivo = open('palavras.txt', 'r')
+    arquivo = open("C:\\Users\Master Tech LG\\school\\jogos\\palavras.txt", "r")
     palavras = []
     for linha in arquivo:
         linha = linha.strip()

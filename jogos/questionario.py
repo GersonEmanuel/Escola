@@ -116,3 +116,6 @@ questoes = [[["Em qual esporte se baseia a Obra \"Ping Pong\" do autor Taiyo Mat
             [['A direção do filme \"Ongaku\" tem um fato interessante, Qual é ele? '],["a) Foi a animação que foi feita mais rápida ","b) Foi feito apenas por uma pessoa ","c) O diretor morreu no meio da criação e o filho dele assumiu ",'b']],
             [['Em \"Slam Dunk\" Por que o protagonista começa a jogar basquete? '],["a) Impressionar uma garota ","b) Amor pelo esporte ","c) Um sonho do seu pai",'a']],
             [['\"Houseki no Kuni\" é uma animação em que os personagens são: '],["a) Animais ",'b) Maquinas ',"c) Minerios ",'c']]]
+
+if __name__ == '__main__':
+    jogar()
