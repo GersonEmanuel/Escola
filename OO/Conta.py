@@ -68,7 +68,5 @@ class Conta:
 
 
 if __name__ == '__main__':
-    conta = Conta('Gerson', '2345', 56000)
-    conta.get_extrato()
-    conta.historico.imprime()
+    pass
 
