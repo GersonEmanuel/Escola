@@ -1,4 +1,6 @@
 import datetime
+from atualizadorconta import AtualizadordeContas
+from random import *
 
 
 class Historico:
@@ -10,6 +12,25 @@ class Historico:
         print('transacoes... ')
         for i in self.transacoes:
             print('-', i)
+
+class Banco:
+    #terminar
+    _todas_as_contas = []
+    def adicionar_conta(self):
+        escolha_conta = int(input('Escolha um tipo de conta\n1-Conta corrente\n2- Conta poupanca '))
+        if escolha_conta == 1:
+            conta = ContaCorrente(str(input("Digite seu nome")), (random.randint(100, 999)), 500)
+            Banco._todas_as_contas.append(conta)
+        elif escolha_conta == 2:
+            conta = ContaPoupanca(str(input("Digite seu nome")),(random.randint(100, 999)), 500 )
+            Banco._todas_as_contas.append(conta)
+    
+    def pegaConta(self, index):
+        return Banco._todas_as_contas[index]
+    
+    def pega_total_contas(self):
+        return f'Tem o total de {len(Banco._todas_as_contas)} contas nesse banco'
+            
 
 
 class Cliente:
@@ -40,6 +61,7 @@ class Conta:
     
     def atualiza(self, taxa):
         self.__saldo += self.__saldo * taxa
+        return self.__saldo
 
 
     def deposito(self, valor):
@@ -78,16 +100,19 @@ class ContaPoupanca(Conta):
         super().__init__(cliente, numero, saldo, limite)
     def atualiza(self, taxa):
         self.__saldo += self.__saldo * taxa*2
+        return self.__saldo
 
 class ContaCorrente(Conta):
     def __init__(self, cliente, numero, saldo, limite = 1000):
         super().__init__(cliente, numero, saldo, limite)
     def atualiza(self, taxa):
         self.__saldo += self.__saldo * taxa * 3
+        return self.__saldo
     
     def deposito(self, valor):
         return super().deposito(valor) -0,10
 
 
 if __name__ == '__main__':
-    pass
+    banco = Banco()
+    banco.adicionar_conta()
