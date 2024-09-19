@@ -33,6 +33,13 @@ class Conta:
     @staticmethod
     def get_totalcontas():
         return Conta._total_contas
+    
+    def __str__(self):
+        return f'Dados da conta:\nTitular: {self.__titular}\nNumero: {self.__numero}\nSaldo: {self.__saldo}\nLimite: {self.__limite} '
+
+    
+    def atualiza(self, taxa):
+        self.__saldo += self.__saldo * taxa
 
 
     def deposito(self, valor):
@@ -65,8 +72,22 @@ class Conta:
             return True
         else:
             return False
+        
+class ContaPoupanca(Conta):
+    def __init__(self, cliente, numero, saldo, limite=1000):
+        super().__init__(cliente, numero, saldo, limite)
+    def atualiza(self, taxa):
+        self.__saldo += self.__saldo * taxa*2
+
+class ContaCorrente(Conta):
+    def __init__(self, cliente, numero, saldo, limite = 1000):
+        super().__init__(cliente, numero, saldo, limite)
+    def atualiza(self, taxa):
+        self.__saldo += self.__saldo * taxa * 3
+    
+    def deposito(self, valor):
+        return super().deposito(valor) -0,10
 
 
 if __name__ == '__main__':
     pass
-
