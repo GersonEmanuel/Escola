@@ -1,7 +1,6 @@
 import datetime
 from atualizadorconta import AtualizadordeContas
-from random import *
-
+import random
 
 class Historico:
     def __init__(self):
@@ -16,14 +15,15 @@ class Historico:
 class Banco:
     #terminar
     _todas_as_contas = []
-    def adicionar_conta(self):
+    def adicionar_conta(self): #escolha errada
         escolha_conta = int(input('Escolha um tipo de conta\n1-Conta corrente\n2- Conta poupanca '))
         if escolha_conta == 1:
-            conta = ContaCorrente(str(input("Digite seu nome")), (random.randint(100, 999)), 500)
+            conta = ContaCorrente( cliente = str(input("Digite seu nome")),numero = random.randint(100, 999), saldo = 500)
             Banco._todas_as_contas.append(conta)
         elif escolha_conta == 2:
-            conta = ContaPoupanca(str(input("Digite seu nome")),(random.randint(100, 999)), 500 )
+            conta = ContaPoupanca(cliente = str(input("Digite seu nome")), numero =(random.randint(100, 999)), saldo =  500 )
             Banco._todas_as_contas.append(conta)
+        return Banco._todas_as_contas
     
     def pegaConta(self, index):
         return Banco._todas_as_contas[index]
@@ -116,3 +116,4 @@ class ContaCorrente(Conta):
 if __name__ == '__main__':
     banco = Banco()
     banco.adicionar_conta()
+    print(banco.pega_total_contas())
