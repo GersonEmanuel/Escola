@@ -13,22 +13,28 @@ class Historico:
             print('-', i)
 
 class Banco:
-    #terminar
     _todas_as_contas = []
-    def adicionar_conta(self): #escolha errada
-        escolha_conta = int(input('Escolha um tipo de conta\n1-Conta corrente\n2- Conta poupanca '))
+        
+    def adicionar_conta(self):
+        escolha_conta = int(input("Digite o numero do tipo de conta que quer\n1-Conta poupanca\n2-Conta corrente\n"))
         if escolha_conta == 1:
-            conta = ContaCorrente( cliente = str(input("Digite seu nome")),numero = random.randint(100, 999), saldo = 500)
+            conta = ContaPoupanca(str(input('Informe seu nome: ')), str(random.randint(100,999)), 0, 1000)
             Banco._todas_as_contas.append(conta)
+            print('Conta adicionada ')
         elif escolha_conta == 2:
-            conta = ContaPoupanca(cliente = str(input("Digite seu nome")), numero =(random.randint(100, 999)), saldo =  500 )
+            conta = ContaCorrente(str(input('Informe seu nome: ')), str(random.randint(100,999)), 0, 1000)
             Banco._todas_as_contas.append(conta)
-        return Banco._todas_as_contas
-    
+            print('Conta adicionada ')
+
+    def lista_conta(self):
+        for i in range(len(Banco._todas_as_contas)):
+            print(f'Conta {i+1} {Banco._todas_as_contas[i]}\n')
+
     def pegaConta(self, index):
         return Banco._todas_as_contas[index]
     
-    def pega_total_contas(self):
+    @staticmethod
+    def pega_total_contas():
         return f'Tem o total de {len(Banco._todas_as_contas)} contas nesse banco'
             
 
@@ -116,4 +122,5 @@ class ContaCorrente(Conta):
 if __name__ == '__main__':
     banco = Banco()
     banco.adicionar_conta()
-    print(banco.pega_total_contas())
+    banco.adicionar_conta()
+    banco.lista_conta()
