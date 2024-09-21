@@ -1,11 +1,12 @@
-class Funcionario:
+import abc
+class Funcionario(abc.ABC):
     def __init__(self, nome, cpf, salario):
         self.nome = nome
         self._cpf = cpf
-        self.__salario = salario
-
+        self._salario = salario
+    @abc.abstractmethod
     def get_bonificacao(self):
-        return self.__salario * 0.10
+        return self._salario * 0.10
 
 class Gerente(Funcionario):
     def __init__(self, nome, cpf, salario, senha, quantidade_funcionarios):
@@ -24,6 +25,7 @@ class Gerente(Funcionario):
         else:
             print("Acesso negado ")
             return False
+        
 
 class ControleDeBonificacoes:
     def __init__(self, total_bonificacoes=0 ):
@@ -39,4 +41,3 @@ class ControleDeBonificacoes:
 
 if __name__ == '__main__':
     pass
-

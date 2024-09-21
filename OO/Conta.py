@@ -1,6 +1,6 @@
 import datetime
 from atualizadorconta import AtualizadordeContas
-import random
+import abc
 
 class Historico:
     def __init__(self):
@@ -39,14 +39,14 @@ class Cliente:
         self.cpf = cpf
 
 
-class Conta:
+class Conta(abc.ABC):
     _total_contas = 0
-    __slots__ = ["__titular", "__numero", "__saldo", "__limite", "historico"]
-    def __init__(self, cliente, numero, saldo, limite = 1000.0):
-        self.__titular = cliente
-        self.__numero = numero
+    __slots__ = ["_titular", "_numero", "_saldo", "_limite", "historico", "tipo_conta"]
+    def __init__(self, cliente, numero, saldo, limite = 1000.0 ):
+        self._titular = cliente
+        self._numero = numero
         self._saldo = saldo
-        self.__limite = limite
+        self._limite = limite
         self.historico = Historico()
         Conta._total_contas += 1
 
@@ -55,9 +55,9 @@ class Conta:
         return Conta._total_contas
     
     def __str__(self):
-        return f'Dados da conta:\nTitular: {self.__titular}\nNumero: {self.__numero}\nSaldo: {self._saldo}\nLimite: {self.__limite} '
+        return f'Dados da conta:\nTitular: {self._titular}\nNumero: {self._numero}\nSaldo: {self._saldo}\nLimite: {self._limite} '
 
-    
+    @abc.abstractmethod
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa
         return self._saldo
@@ -81,7 +81,7 @@ class Conta:
 
 
     def get_extrato(self):
-        print(f'numero: {self.__numero}\nsaldo: {self._saldo}')
+        print(f'numero: {self._numero}\nsaldo: {self._saldo}')
         self.historico.transacoes.append(f'tirou extrato - saldo de {self._saldo} ')
 
 
@@ -97,28 +97,43 @@ class Conta:
 class ContaPoupanca(Conta):
     def __init__(self, cliente, numero, saldo, limite=1000):
         super().__init__(cliente, numero, saldo, limite)
+        self.conta_tipo = 'poupanca'
+
+    def __str__(self):
+        return f'Dados da conta:\nTitular: {self._titular}\nNumero: {self._numero}\nSaldo: {self._saldo}\nLimite: {self._limite}\nTipo da conta: {self.conta_tipo} '
+        
     def atualiza(self, taxa):
-        self._saldo += self._saldo * taxa*2
-        return self._saldo
+        return super().atualiza(taxa) * 2
 
 class ContaCorrente(Conta):
     def __init__(self, cliente, numero, saldo, limite = 1000):
         super().__init__(cliente, numero, saldo, limite)
+        self.conta_tipo = 'Corrente'
+
+    def __str__(self):
+        return f'Dados da conta:\nTitular: {self._titular}\nNumero: {self._numero}\nSaldo: {self._saldo}\nLimite: {self._limite}\nTipo da conta: {self.conta_tipo} '
+
+
     def atualiza(self, taxa):
-        self._saldo += self._saldo * taxa * 3
-        return self._saldo
+        return super().atualiza(taxa) *3
     
     def deposito(self, valor):
         return super().deposito(valor) -0,10
+    
+class ContaInvestimento(Conta):
+    def __init__(self, cliente, numero, saldo, limite=1000):
+        super().__init__(cliente, numero, saldo, limite)
+        self.conta_tipo = 'Investimento' 
+    
+    def __str__(self):
+        return f'Dados da conta:\nTitular: {self._titular}\nNumero: {self._numero}\nSaldo: {self._saldo}\nLimite: {self._limite}\nTipo da conta: {self.conta_tipo} '
 
+
+    def atualiza(self, taxa):
+        return super().atualiza(taxa) * 5
 
 if __name__ == '__main__':
-    controle = AtualizadordeContas(0,3)
-    banco = Banco()
-    cc = ContaCorrente('g','432',500,1000)
-    banco.adicionar_conta(cc)
-    cp = ContaPoupanca('h','531',1000)
-    banco.adicionar_conta(cp)
-    for i in Banco._todas_as_contas:
-        controle.roda(i)
-        
+    ci = ContaInvestimento('ger', '543', 5000)
+    cc = ContaCorrente('e','543',400)
+    cp = ContaPoupanca('l', '439', 2000)
+    print(f'{ci}\n{cc}\n{cp}')
