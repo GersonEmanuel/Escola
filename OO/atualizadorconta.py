@@ -6,3 +6,5 @@ class AtualizadordeContas:
         print(f'Saldo da conta: {conta._saldo}')
         self._saldo_total += conta.atualiza(self._selic)
         print(f'Saldo Final: {self._saldo_total}')
+if __name__ == '__main__':
+    pass

@@ -11,7 +11,9 @@ class Historico:
         print('transacoes... ')
         for i in self.transacoes:
             print('-', i)
-
+class TributavelMixIn:
+    def get_valor_imposto(self):
+        pass
 class Banco:
     _todas_as_contas = []
         
@@ -30,13 +32,6 @@ class Banco:
     def pega_total_contas():
         return f'Tem o total de {len(Banco._todas_as_contas)} contas nesse banco'
             
-
-
-class Cliente:
-    def __init__(self, nome, sobrenome, cpf):
-        self.nome = nome
-        self.sobrenome = sobrenome
-        self.cpf = cpf
 
 
 class Conta(abc.ABC):
@@ -105,7 +100,7 @@ class ContaPoupanca(Conta):
     def atualiza(self, taxa):
         return super().atualiza(taxa) * 2
 
-class ContaCorrente(Conta):
+class ContaCorrente(Conta, TributavelMixIn):
     def __init__(self, cliente, numero, saldo, limite = 1000):
         super().__init__(cliente, numero, saldo, limite)
         self.conta_tipo = 'Corrente'
@@ -113,6 +108,8 @@ class ContaCorrente(Conta):
     def __str__(self):
         return f'Dados da conta:\nTitular: {self._titular}\nNumero: {self._numero}\nSaldo: {self._saldo}\nLimite: {self._limite}\nTipo da conta: {self.conta_tipo} '
 
+    def get_valor_imposto(self):
+        return self._saldo * 0.01
 
     def atualiza(self, taxa):
         return super().atualiza(taxa) *3
@@ -131,9 +128,17 @@ class ContaInvestimento(Conta):
 
     def atualiza(self, taxa):
         return super().atualiza(taxa) * 5
+    
+class SegurodeVIda(TributavelMixIn):
+    def __init__(self, valor, titular, numero_apolice):
+        self._valor = valor
+        self._titular = titular
+        self._numero_apolice = numero_apolice
+
+    def get_valor_imposto(self):
+        return 50 + self._valor *0.05
+
+        
 
 if __name__ == '__main__':
-    ci = ContaInvestimento('ger', '543', 5000)
-    cc = ContaCorrente('e','543',400)
-    cp = ContaPoupanca('l', '439', 2000)
-    print(f'{ci}\n{cc}\n{cp}')
+    pass
