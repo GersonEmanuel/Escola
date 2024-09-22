@@ -11,7 +11,8 @@ class Historico:
         print('transacoes... ')
         for i in self.transacoes:
             print('-', i)
-class TributavelMixIn:
+class Tributavel(abc.ABC):
+    @abc.abstractmethod
     def get_valor_imposto(self):
         pass
 class Banco:
@@ -100,7 +101,7 @@ class ContaPoupanca(Conta):
     def atualiza(self, taxa):
         return super().atualiza(taxa) * 2
 
-class ContaCorrente(Conta, TributavelMixIn):
+class ContaCorrente(Conta):
     def __init__(self, cliente, numero, saldo, limite = 1000):
         super().__init__(cliente, numero, saldo, limite)
         self.conta_tipo = 'Corrente'
@@ -129,7 +130,10 @@ class ContaInvestimento(Conta):
     def atualiza(self, taxa):
         return super().atualiza(taxa) * 5
     
-class SegurodeVIda(TributavelMixIn):
+    def get_valor_imposto(self):
+        return self._saldo * 0.03
+    
+class SegurodeVIda:
     def __init__(self, valor, titular, numero_apolice):
         self._valor = valor
         self._titular = titular

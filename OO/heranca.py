@@ -1,14 +1,15 @@
 import abc
 class SistemaInterno:
     def login(self,obj):
-        if(hasattr(obj, 'autentica')):
-            obj.autentica()
+        if(isinstance(obj, Autenticavel)):
+            obj.autentica(str(input("Digite sua senha ")))
             return True
         else:
             print(f'{self.__class__.__name__} não é autenticavel ')
             return False
 
-class AutenticavelMixIn:
+class Autenticavel(abc.ABC):
+    @abc.abstractmethod
     def autentica(self, senha):
         if senha == self._senha:
             return True
@@ -31,7 +32,7 @@ class Cliente:
         self.cpf = cpf
 
 
-class Gerente(Funcionario, AutenticavelMixIn):
+class Gerente(Funcionario):
     def __init__(self, nome, cpf, salario, senha, quantidade_funcionarios):
         super().__init__(nome, cpf, salario)
         self._senha = senha
@@ -41,7 +42,7 @@ class Gerente(Funcionario, AutenticavelMixIn):
         return super().get_bonificacao() + 1000
 
 
-    def autenticar(self, senha):
+    def autentica(self, senha):
         if senha == self._senha:
             print("Acesso permitido ")
             return True
@@ -49,7 +50,7 @@ class Gerente(Funcionario, AutenticavelMixIn):
             print("Acesso negado ")
             return False
         
-class Diretor(Funcionario, AutenticavelMixIn):
+class Diretor(Funcionario, Autenticavel):
     def __init__(self, nome, cpf, salario,senha):
         super().__init__(nome, cpf, salario)
         self._senha = senha
@@ -76,4 +77,7 @@ class ControleDeBonificacoes:
         return self._total_bonificacos
 
 if __name__ == '__main__':
-    pass
+    gerente = Gerente('ger', '233', 5000, '321',4)
+    Autenticavel.register(Gerente)
+    sistema = SistemaInterno()
+    sistema.login(gerente)
