@@ -3,6 +3,34 @@ from atualizadorconta import AtualizadordeContas
 import abc
 from excecoes import *
 
+class CaixaEletronico:
+    def deposita(self, destino, valor):
+        if isinstance(destino, Conta):
+            try:
+                destino.deposita(valor)
+            except ValueError:
+                print('Não é possivel depositar valores negativos ')
+            else:
+                print(f'Deposito de {valor} executado com sucesso')
+        else:
+            print('Não é possivel realizar o deposito ')
+            
+    def saca(self, destino, valor):
+        if isinstance(destino, Conta):
+            try:
+                destino.sacar(valor)
+            except ValueError:
+                print('Não é possivel sacar valores negativos ')
+            except SaldoInsuficienteError:
+                print('Voce nao tem saldo suficiente ')
+            else:
+                print(f'O saque de {valor} foi realizado com sucesso ')
+        else:
+            print('Não foi possivel sacar o valor')
+
+
+
+
 class Historico:
     def __init__(self):
         self.data_abertura = datetime.datetime.today()
@@ -60,21 +88,22 @@ class Conta(abc.ABC):
         return self._saldo
 
 
-    def deposito(self, valor):
+    def deposita(self, valor):
         if valor<0:
             raise ValueError('Voce informou um valor negativo ')
-            return False
         self._saldo += valor
         self.historico.transacoes.append(f'Deposito de {valor}')
         return self._saldo
 
     def get_saldo(self):
         return self._saldo
+    
+
     def sacar(self, valor):
         if self._saldo<valor:
-            raise SaldoInsuficienteError('Voce tentou retirar um valor maior que possui ')
+            raise SaldoInsuficienteError
         elif self._saldo <0:
-            raise ValueError('Voce tentou retirar um valor negativo ')
+            raise ValueError
         else:
             self._saldo -= valor
             self.historico.transacoes.append(f'saque de {valor} ')
@@ -121,14 +150,17 @@ class ContaCorrente(Conta):
     def atualiza(self, taxa):
         return super().atualiza(taxa) *3
     
-    def deposito(self, valor):
-        return super().deposito(valor) -0,10
+    def deposita(self, valor):
+        return super().deposita(valor) -0,10
     
     def sacar(self, valor):
         if valor<0:
-            raise ValueError("Voce tentou sacar um valor negativo ")
-        if valor>self._saldo:
-            raise SaldoInsuficienteError('Saldo insuficiente')
+            raise ValueError
+        elif valor>self._saldo:
+            raise SaldoInsuficienteError
+        return super().sacar(valor)
+    
+
 class ContaInvestimento(Conta):
     def __init__(self, cliente, numero, saldo, limite=1000):
         super().__init__(cliente, numero, saldo, limite)
