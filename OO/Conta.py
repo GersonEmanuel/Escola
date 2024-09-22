@@ -29,8 +29,6 @@ class CaixaEletronico:
             print('Não foi possivel sacar o valor')
 
 
-
-
 class Historico:
     def __init__(self):
         self.data_abertura = datetime.datetime.today()
@@ -40,6 +38,8 @@ class Historico:
         print('transacoes... ')
         for i in self.transacoes:
             print('-', i)
+
+
 class Tributavel(abc.ABC):
     @abc.abstractmethod
     def get_valor_imposto(self):
@@ -188,4 +188,4 @@ class SegurodeVIda:
         
 
 if __name__ == '__main__':
-    pass
+    pass    

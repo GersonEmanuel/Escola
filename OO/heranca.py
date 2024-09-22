@@ -1,4 +1,5 @@
 import abc
+import csv
 class SistemaInterno:
     def login(self,obj):
         if(isinstance(obj, Autenticavel)):
@@ -77,7 +78,4 @@ class ControleDeBonificacoes:
         return self._total_bonificacos
 
 if __name__ == '__main__':
-    gerente = Gerente('ger', '233', 5000, '321',4)
-    Autenticavel.register(Gerente)
-    sistema = SistemaInterno()
-    sistema.login(gerente)
+    pass      
