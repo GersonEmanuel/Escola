@@ -10,13 +10,4 @@ class ManipuladordeTributaveis:
         return total
     
 if __name__ == '__main__':
-    cc = ContaCorrente('ger', '342', 5000)
-    sg = SegurodeVIda(1000, 'ger', '431')
-    Tributavel.register(ContaCorrente)
-    Tributavel.register(SegurodeVIda)
-    Tributavel.register(ContaInvestimento) 
-    ci = ContaInvestimento('ger', '2345', 3000, 1000)
-    lista_ = [cc, sg, ci]
-    mp = ManipuladordeTributaveis()
-    total =mp.calcula_impostos(lista_)
-    print(total)
+    pass
