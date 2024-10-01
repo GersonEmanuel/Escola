@@ -13,37 +13,33 @@ def regras():
         print("Dificuldade: dificil, range: 0 a 20, tentativas: 5")
     else:
         pass
-def dificuldade():
-    escolha = int(input("Digite um numero para a dificuldade:\n[1]facil\n[2]medio\n[3]dificil\n"))
-    if escolha == 1:
-        lista_numero = [i for i in range(5)]
-        numero = random.choice(lista_numero)
-        tentativas = 2
-    elif escolha == 2:
-        lista_numero = [i for i in range(10)]
-        numero = random.choice(lista_numero)
-        tentativas = 3
-    elif escolha == 3:
-        lista_numero = [i for i in range(20)]
-        numero = random.choice(lista_numero)
-        tentativas = 5
-    return(lista_numero), numero, tentativas
-def jogar(lista_numero,numero, tentativas):
+def dificuldade(escolha):
+    chaves = {1:{'dificuldade':'facil', 'tentativas':2, 'numero': random.randint(0,5), 'range': 5},
+              2:{'dificuldade':'medio', 'tentativas':3, 'numero': random.randint(0,10), 'range': 10},
+              3:{'dificuldade':'dificil', 'tentativas':5, 'numero': random.randint(0,20), 'range': 20}}
+    for k,v in chaves.items():
+        if k ==escolha:
+            return v
+    
+def jogar():
+    inicio()
+    regras()
+    norma = dificuldade(int(input("Digite um numero para a dificuldade:\n[1]facil\n[2]medio\n[3]dificil\n")))
     ganhou = False
-    while tentativas>0:
-        print(f'Voce tem {tentativas} para acertar um numero de 0 a {len(lista_numero)}, boa sorte!!')
+    while norma['tentativas']>0:
+        print(f'Voce tem {norma['tentativas']} para acertar um numero de 0 a {norma['range']}, boa sorte!!')
         escolher_numero = int(input("Digite aqui o numero escoolhido:"))
-        if escolher_numero != numero:
+        if escolher_numero != norma['numero']:
             print("Voce errou o numero ")
-            tentativas -=1
+            norma['tentativas'] -=1
         else:
-            print(f"Voce acertou, parabens, o numero era {numero}")
+            print(f"Voce acertou, parabens, o numero era {norma['numero']}")
             ganhou = True
             break
     if ganhou:
         print("Meus parabens, tem muita sorte ou talvez voce seja bom demais, quem sabe ")
     else:
-        print(f"Voce perdeu, que pena o numero era {numero}")
+        print(f"Voce perdeu, que pena o numero era {norma['numero']}")
 
 
 

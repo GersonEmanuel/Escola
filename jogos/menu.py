@@ -11,12 +11,8 @@ if __name__ == '__main__':
         escolha = int(input("O que quer jogar? [digite o numero], caso queira sair, digite qualquer outro numero "))
         if escolha == 1:
             forca.jogar()
-            Jogar = True
         elif escolha == 2:
-            adivinhacao.inicio()
-            adivinhacao.regras()
-            adivinhacao.jogar(*adivinhacao.dificuldade())
-            Jogar = True
+            adivinhacao.jogar()
         elif escolha == 3:
             questionario.jogar()
 
