@@ -102,11 +102,11 @@ class Board:
 
 
 safe = True
-def play(dim_size = 10, num_bombs=10):
+def jogar(dim_size = 10, num_bombs=10):
     board = Board(dim_size, num_bombs)
     while len(board.dug)<board.dim_size **2 - num_bombs:
         print(board)
-        user_input = input("Onde voce vai mergulhar, linha, coluna")
+        user_input = input("Onde voce vai mergulhar, linha, coluna ")
         row, col = int(user_input[0]), int(user_input[-1])
         if row<0 or row>= board.dim_size or col<0 or col>=dim_size:
             print("localidade invalida")

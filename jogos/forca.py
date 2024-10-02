@@ -59,4 +59,3 @@ def jogar():
         mensagem_vencedor()
     else:
         mensagem_perdedor()
-jogar()
