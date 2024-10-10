@@ -6,5 +6,5 @@ class Animal:
         print(f'meu nome: {self.nome}')
         print(f'meu peso: {self.peso}')
 
-    def alimentar(self):
+    def alimentar(self, comida):
         self.peso += comida
