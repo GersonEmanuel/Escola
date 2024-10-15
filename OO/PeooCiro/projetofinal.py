@@ -69,11 +69,21 @@ class conta:
         self.botao.pack()
         self.mensagem = Label(self.c7, text="")
         self.mensagem.pack()
+
+
+    def conta_existe(self, username):
+        with open('contaususarios.txt') as arquivo:
+            for conta in arquivo.readlines():
+                if username == conta:
+                    return True
+        return False
+
     def login_p(self):
         verificacao = False
         with open("contasusuarios.txt") as arquivo:
             for contausuario in arquivo.readlines():
                 pessoa, senha = contausuario.strip().split(",")
+                print(pessoa, senha)
                 if self.l2.get() == pessoa and self.l3.get() == senha:
                     verificacao = True
                     global pessoa_nome
@@ -92,7 +102,7 @@ class conta:
                         break
         if verificacao == False and self.l3.get() == self.l4.get():
             with open("contasusuarios.txt", "a") as arquivo:
-                arquivo.write("{},{}\n".format(self.l2.get(), self.l3.get()))
+                arquivo.write(f'{self.l2.get()},{self.l3.get()}')
                 self.mensagem["text"] = "conta salva"
         else:
             self.mensagem['text'] = 'algo deu errado'
