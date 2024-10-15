@@ -90,22 +90,21 @@ class conta:
                     pessoa_nome = self.l2.get()
                     pagina_menu()
             if verificacao == False:
-                self.mensagem["text"] = "nenhuma conta encontrada"            
+                self.mensagem["text"] = "nenhuma conta encontrada"    
+                
+                        
     def cadastro_p(self):
-        verificacao = False
-        if os.path.isfile("contasusuarios.txt") == True:
-            with open("contasusuarios.txt") as arquivo:
-                for contausuario in arquivo.readlines():
-                    pessoa, senha = contausuario.strip().split(",")
-                    if self.l2.get() == pessoa:
-                        verificacao = True
-                        break
-        if verificacao == False and self.l3.get() == self.l4.get():
-            with open("contasusuarios.txt", "a") as arquivo:
+        with open('contasusuarios.txt') as arquivo:     
+            for contausuario in arquivo.readlines():
+                print(contausuario)
+                if self.conta_existe(contausuario):
+                    self.mensagem['text'] = 'conta ja existe'
+                    return
+
                 arquivo.write(f'{self.l2.get()},{self.l3.get()}')
                 self.mensagem["text"] = "conta salva"
-        else:
-            self.mensagem['text'] = 'algo deu errado'
+        
+
 
 
 class filme:
