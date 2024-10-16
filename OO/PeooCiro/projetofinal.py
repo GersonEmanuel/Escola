@@ -72,8 +72,9 @@ class conta:
 
 
     def conta_existe(self, username):
-        with open('contaususarios.txt') as arquivo:
+        with open('contasusuarios.txt', 'a') as arquivo:
             for conta in arquivo.readlines():
+                print(conta)
                 if username == conta:
                     return True
         return False
@@ -91,18 +92,15 @@ class conta:
                     pagina_menu()
             if verificacao == False:
                 self.mensagem["text"] = "nenhuma conta encontrada"    
-                
-                        
-    def cadastro_p(self):
-        with open('contasusuarios.txt') as arquivo:     
-            for contausuario in arquivo.readlines():
-                print(contausuario)
-                if self.conta_existe(contausuario):
-                    self.mensagem['text'] = 'conta ja existe'
-                    return
 
-                arquivo.write(f'{self.l2.get()},{self.l3.get()}')
-                self.mensagem["text"] = "conta salva"
+
+    def cadastro_p(self):
+        if self.conta_existe(self.l2.get()):
+            self.mensagem['text'] = 'conta ja existe'
+                return
+
+        arquivo.write("{},{}\n".format(self.l2.get(), self.l3.get()))
+        self.mensagem["text"] = "conta salva"
         
 
 
