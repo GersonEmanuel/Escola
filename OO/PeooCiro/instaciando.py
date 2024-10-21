@@ -1,5 +1,6 @@
 from alunos import *
-class Alunos:
+from classes import *
+class Alunos3:
     alunos_na_escola = []
     def adicionar_aluno(self, aluno):
         self.alunos_na_escola.append(aluno)
@@ -8,10 +9,14 @@ class Alunos:
         for i in self.alunos_na_escola:
             print(i)
 
-gerson = Aluno('gerson', 'informatica', 2023)
-escola = Alunos()
-escola.adicionar_aluno(gerson)
-if gerson.foi_para_escola:
-    gerson.lachar('bolo')
-
-escola.mostrar_alunos()
+if __name__ == '__main__':
+    pessoa1 = Pessoa('Gerson', 10)
+    pessoa2 = Pessoa('Emanuel', 20)
+    pessoa1.DizerONome()
+    pessoa1.DizerAidade()
+    pessoa2.DizerONome()
+    pessoa2.DizerAidade()
+    pessoa2.FazerAniversario()
+    pessoa1.FazerAniversario()
+    pessoa1.DizerAidade()
+    pessoa2.DizerAidade()
