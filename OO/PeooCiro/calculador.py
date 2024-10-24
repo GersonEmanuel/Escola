@@ -11,5 +11,3 @@ class Calculadora:
     def subtrair(self,a,b):
         return a-b
     
-c = Calculadora()
-c.multiplicar(5,5)

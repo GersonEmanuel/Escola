@@ -28,6 +28,48 @@ class Aluno:
         if anosreprovados>2:
             return True
         return False
+    
+
+class Pessoa:
+    def __init__(self, nome:str, idade:int):
+        self.nome = nome
+        self.idade = idade
+
+    def DizerONome(self):
+        print(f'Ola meu nome é {self.nome}')
+    
+    def DizerAIdade(self):
+        print(f'Ola eu tenho {self.idade}')
+
+    def fazerAniversario(self):
+        print('Voce fez aniversario ')
+        self.idade +=1 
+        
+
+class Lampada:
+    def __init__(self, acesa:bool, volts:float) -> None:
+        self.acesa = False
+        self.volts = volts
+
+    def acender(self):
+        self.acesa = True
+        
+    
+    def apagar(self):
+        self.acesa = False
+
+    def informarSituacao(self):
+        if self.acesa:
+            print('A luz esta acesa')
+            return
+        print('A luz esta apagada ')
+
+    def 
+
+        
+        
+
+        
 
 
         

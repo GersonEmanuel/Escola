@@ -244,7 +244,7 @@ class pagina_menu:
         if problema == True:
             self.mensagem["text"] = "feito"
 
-
-raiz = Tk()
-conta(raiz)
-raiz.mainloop()
+if __name__ == '__main__':
+    raiz = Tk()
+    conta(raiz)
+    raiz.mainloop()
