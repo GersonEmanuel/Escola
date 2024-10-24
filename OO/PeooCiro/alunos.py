@@ -54,7 +54,6 @@ class Lampada:
     def acender(self):
         self.acesa = True
         
-    
     def apagar(self):
         self.acesa = False
 
@@ -64,7 +63,8 @@ class Lampada:
             return
         print('A luz esta apagada ')
 
-    def 
+    def informarPotencia(self):
+        print(f'A potencia da lampada é {self.volts} volts')
 
         
         
