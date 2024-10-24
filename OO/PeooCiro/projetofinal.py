@@ -97,7 +97,7 @@ class conta:
     def cadastro_p(self):
         if self.conta_existe(self.l2.get()):
             self.mensagem['text'] = 'conta ja existe'
-                return
+            return
 
         arquivo.write("{},{}\n".format(self.l2.get(), self.l3.get()))
         self.mensagem["text"] = "conta salva"
