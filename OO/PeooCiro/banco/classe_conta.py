@@ -24,6 +24,7 @@ class BancoManagement:
 
     def create_conta(self, cpf):
         if UsuariosManagement.user_existe(self, usercpf=cpf):
+            user = UsuariosManagement.get_user(self, cpf)
             conta_user = Conta(numero_conta=random.randint(1000,10000), agencia=str(input('Em qual agencia deseja criar? ')), dono= user, saldo=0)
             if BancoManagement.conta_existe(conta_user):
                 print('Não é possivel adicionar essa conta, ela ja existe no banco')

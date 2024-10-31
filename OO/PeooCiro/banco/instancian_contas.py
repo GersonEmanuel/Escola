@@ -9,4 +9,6 @@ def criar_usuario():
     ano_nascimento = int(input('Ano de nascimento '))
     usuarios.create_user(nome, cpf, ano_nascimento)
 
-
+criar_usuario()
+banco.create_conta('231')
+banco.show_contas()
