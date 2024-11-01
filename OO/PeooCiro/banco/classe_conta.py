@@ -28,8 +28,6 @@ class Conta:
         print(f'valor transferido')
 
         
-        
-
     def __str__(self):
         return f'numero da conta: {self.numero_conta}\nagencia: {self.agencia}\ndono: {self.dono}\nsaldo: {self.saldo}'
     
@@ -68,6 +66,14 @@ class BancoManagement:
             if contas.numero_conta == conta.numero_conta and contas.agencia == conta.agencia:
                 return True
         return False
+    
+    def get_conta(self, numeroconta, agencia):
+        for conta in BancoManagement.banco_contas:
+            if conta.numero_conta == numeroconta and conta.agencia == agencia:
+                return conta
+        return False
+            
+
 
 class UsuariosManagement:
     users = []
