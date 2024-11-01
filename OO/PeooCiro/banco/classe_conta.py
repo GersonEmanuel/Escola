@@ -5,6 +5,30 @@ class Conta:
         self.agencia = agencia
         self.dono = dono
         self.saldo = saldo
+        contas = BancoManagement()
+
+    def depositar(self, valor):
+        if valor<0:
+            print('não é possivel depositar')
+            return
+        print(f'deposito de {valor} bem sucedido ')
+        self.saldo += valor
+
+    def sacar(self, valor):
+        if valor>self.saldo:
+            print('não é possivel sacar um valor que voce não possui')
+            return
+        print(f'saque de {valor} bem sucedido')
+        self.saldo -= valor
+        
+
+    def transferir_para(self, conta, valor):
+        self.sacar(valor)
+        conta.depositar(self, valor)
+        print(f'valor transferido')
+
+        
+        
 
     def __str__(self):
         return f'numero da conta: {self.numero_conta}\nagencia: {self.agencia}\ndono: {self.dono}\nsaldo: {self.saldo}'
@@ -14,6 +38,7 @@ class Usuario:
         self.nome = nome
         self.cpf = cpf
         self.nascimento = nascimento
+        user = UsuariosManagement()
 
     def __str__(self):
         return f'nome: {self.nome}, cpf: {self.cpf}, ano de nascimento: {self.nascimento}'
