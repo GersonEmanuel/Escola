@@ -5,6 +5,9 @@ class Conta:
         self.agencia = agencia
         self.dono = dono
         self.saldo = saldo
+
+    def __str__(self):
+        return f'numero da conta: {self.numero_conta}\nagencia: {self.agencia}\ndono: {self.dono}\nsaldo: {self.saldo}'
     
 class Usuario:
     def __init__(self, nome:str, cpf:str, nascimento:str):
