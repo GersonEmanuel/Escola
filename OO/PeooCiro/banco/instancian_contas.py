@@ -1,4 +1,5 @@
 from classe_conta import *
+from random import randint
 banco = BancoManagement()
 usuarios = UsuariosManagement()
 
