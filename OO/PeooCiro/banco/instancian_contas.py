@@ -26,6 +26,8 @@ def criar_senha():
         print('as senhas nao se condizem, tente novamente')
         criar_senha()
     return senha
+
+opcoes = {'criar usuario': criar_usuario(), 'criar conta': criar_conta(), 'criar_senha':criar_senha(), 'ver_users': usuarios.show_users(), 'ver_contas': banco.show_contas()}
     
 
 
