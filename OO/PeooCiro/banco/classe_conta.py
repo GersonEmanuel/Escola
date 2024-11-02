@@ -1,10 +1,11 @@
 from random import *
 class Conta:
-    def __init__(self, numero_conta: str, agencia:str, dono:str, saldo:float):
+    def __init__(self, numero_conta: str, agencia:str, dono:str, saldo:float, senha:str):
         self.numero_conta = numero_conta
         self.agencia = agencia
         self.dono = dono
         self.saldo = saldo
+        self.senha = senha
         contas = BancoManagement()
 
     def depositar(self, valor):
@@ -48,29 +49,38 @@ class BancoManagement:
         for i in range(len(BancoManagement.banco_contas)):
             print(BancoManagement.banco_contas[i]) 
 
-    def create_conta(self, cpf):
+    def create_conta(self, cpf, numero_conta, agencia, senha):
         if UsuariosManagement.user_existe(self, usercpf=cpf):
             user = UsuariosManagement.get_user(self, cpf)
-            conta_user = Conta(numero_conta=(randint(1000,10000)), agencia=str(input('Em qual agencia deseja criar? ')), dono= user, saldo=0)
+            conta_user = Conta(numero_conta = numero_conta, agencia=agencia, dono = user, saldo =0, senha = senha )
             if BancoManagement.conta_existe(self, conta_user):
                 print('Não é possivel adicionar essa conta, ela ja existe no banco')
                 return
             BancoManagement.banco_contas.append(conta_user)
-            return conta_user
+            return 
         print('cpf nao existe, impossivel criar uma conta ')
         return
         
 
-    def conta_existe(self, conta):
-        for contas in BancoManagement.banco_contas:
-            if contas.numero_conta == conta.numero_conta and contas.agencia == conta.agencia:
+    def conta_existe(self, numeroconta, agencia):
+        for conta in BancoManagement.banco_contas:
+            if conta.numero_conta == numeroconta and conta.agencia == agencia:
                 return True
         return False
     
+
     def get_conta(self, numeroconta, agencia):
         for conta in BancoManagement.banco_contas:
-            if conta.numero_conta == numeroconta and conta.agencia == agencia:
-                return conta
+            if BancoManagement.conta_existe(self, numeroconta, agencia):
+                if BancoManagement.verificacao_login(self, conta, str(input('Digite sua senha'))):
+                    return conta
+                print('login invalido ')
+        return False
+    
+
+    def verificacao_login(self, conta, senha):
+        if conta.senha == senha:
+            return True
         return False
             
 
