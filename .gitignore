@@ -3,3 +3,5 @@
 /workspace.xml
 .contasusuarios
 .idea
+*.exe
+.vscode
