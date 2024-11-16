@@ -1,6 +1,6 @@
 #ifndef CLIENTE_H_ICLUDED
 #define CLIENTE_H_ICLUDED
-
+#include <iostream>
 class Cliente{
     public:
     void MudaCPF(std::string cpf);
