@@ -44,15 +44,15 @@ class Cliente:
                 validacao2 = True
 
             if quant_digitos == True and formatacao == True and validacao1 == True and validacao2 == True:
-                print(f"O CPF {cpf} é válido.")
+                return True
             else:
-                print(f"O CPF {cpf} não é válido... Tente outro CPF...")
+                return False
 
         else:
-            print(print(f"O CPF {cpf} não é válido... Tente outro CPF..."))
+            return False
 
 
     def __setCPF(self, cpf):
-        if verificaCPF(cpf):
+        if self.verificaCPF(cpf):
             self.__cpf = cpf
 
