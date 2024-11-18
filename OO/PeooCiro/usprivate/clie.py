@@ -1,9 +1,11 @@
 import re
 class Cliente:
-    __nome = ''
-    __endereco = ''
-    __cpf = ''
-    __idade = 0
+    def __init__(self, nome:str, endereco:str, cpf:str, idade:int)->None:
+        self.__nome = nome
+        self.__endereco = endereco
+        self.__cpf = cpf
+        self.__idade = idade
+
 
 
     def Getnome(self)->str:
@@ -17,6 +19,20 @@ class Cliente:
     
     def getIdade(self)-> int:
         return self.__idade
+
+
+    def __setNome(self, nome):
+        self.__nome = nome
+
+    def __setEndereco(self, endereco):
+        self.__endereco = endereco
+
+    def __setCPF(self, cpf):
+        if self.verificaCPF(cpf):
+            self.__cpf = cpf
+
+    def __setIdade(self, idade):
+        self.__idade = idade
     
     def verificaCPF(self, cpf)->bool:
         numeros = [int(digito) for digito in cpf if digito.isdigit()]
@@ -52,7 +68,5 @@ class Cliente:
             return False
 
 
-    def __setCPF(self, cpf):
-        if self.verificaCPF(cpf):
-            self.__cpf = cpf
+
 
